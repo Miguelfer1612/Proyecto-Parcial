@@ -1,0 +1,89 @@
+swagger: "2.0"
+info:
+  description: "API para gestionar la tabla Dicta y Profesores"
+  version: "1.0.0"
+  title: "API de Dicta y Profesores"
+host: "localhost:8005"
+basePath: "/"
+schemes:
+  - "http"
+paths:
+  /dicta:
+    get:
+      summary: "Obtener todos los registros de la tabla Dicta"
+      responses:
+        200:
+          description: "Operación exitosa"
+          schema:
+            type: array
+            items:
+              properties:
+                id:
+                  type: integer
+                profesor:
+                  type: string
+                codigo_curso:
+                  type: string
+                nombre_curso:
+                  type: string
+                seccion:
+                  type: integer
+                periodo:
+                  type: string
+                cant_horas:
+                  type: integer
+    post:
+      summary: "Agregar un nuevo registro a la tabla Dicta"
+      parameters:
+        - in: body
+          name: body
+          description: "Datos de Dicta"
+          required: true
+          schema:
+            properties:
+              id_profesor:
+                type: integer
+                example: 1
+              codigo_curso:
+                type: string
+                example: CS2031
+              nombre_curso:
+                type: string
+                example: Cloud Computing
+              seccion:
+                type: integer
+                example: 1
+              periodo:
+                type: string
+                example: 2024-2
+              cant_horas:
+                type: integer
+                example: 12
+      responses:
+        201:
+          description: "Dicta creado exitosamente"
+  /profesor:
+    post:
+      summary: "Agregar un nuevo profesor"
+      parameters:
+        - in: body
+          name: body
+          description: "Datos del profesor"
+          required: true
+          schema:
+            properties:
+              nombres:
+                type: string
+                example: Juan Perez
+              correo:
+                type: string
+                example: juan.perez@example.com
+              sueldo:
+                type: number
+                example: 3000.50
+              fecha_nacimiento:
+                type: string
+                example: 1980-05-10
+      responses:
+        201:
+          description: "Profesor creado exitosamente"
