@@ -69,10 +69,13 @@ def create_profesor():
     INSERT INTO Profesor (nombres, correo, sueldo, fecha_nacimiento)
     VALUES (%s, %s, %s, %s)
     """
-    cursor.execute(query, (nombres, correo, sueldo, fecha_nacimiento))
-    db.commit()
-
-    return jsonify({'message': 'Profesor created successfully'}), 201
+    try:
+        cursor.execute(query, (nombres, correo, sueldo, fecha_nacimiento))
+        db.commit()
+        return jsonify({'message': 'Profesor created successfully'}), 201
+    except mysql.connector.Error as err:
+        print(f"Error: {err}")
+        return jsonify({'message': 'Error al crear el profesor', 'error': str(err)}), 400
 
 # Ejecutando la aplicación:
 if __name__ == '__main__':
